@@ -13,8 +13,9 @@ class MiracleList:
 
     def sort(self):
         for i in range(1, len(self.mass)):
-            if self.mass[i - 1] > self.mass[i]:
-                self.mass[i - 1], self.mass[i] = self.mass[i], self.mass[i - 1]
+            for j in range(i, len(self.mass)):
+                if self.mass[j - 1] > self.mass[j]:
+                    self.mass[j - 1], self.mass[j] = self.mass[j], self.mass[j - 1]
         return self.mass
 
     def bin(self, number):
@@ -33,7 +34,7 @@ class MiracleList:
         else:
             print('Такого числа нет в массиве')
 
-list_ = MiracleList([2, 10, 8])
+list_ = MiracleList([2, 10, 8, 5, 6, 12, 13])
 list_.print()
 print('Отсортированный массив', list_.sort())
-list_.bin(10)
+list_.bin(12)
