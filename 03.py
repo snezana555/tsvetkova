@@ -12,15 +12,28 @@ class MiracleList:
         print(self.mass)
 
     def sort(self):
-        return sorted(self.mass)
+        for i in range(1, len(self.mass)):
+            if self.mass[i - 1] > self.mass[i]:
+                self.mass[i - 1], self.mass[i] = self.mass[i], self.mass[i - 1]
+        return self.mass
 
     def bin(self, number):
-        if number in self.mass:
-            return self.mass.index(number)
+        self.sort()
+        l = 0
+        r = len(self.mass) - 1
+        while(l <= r):
+            middle = (l + r) // 2
+            if (number == self.mass[middle]):
+                print('Индекс числа в отсортированном массиве ', middle)
+                break;
+            elif self.mass[middle] < number:
+                l = middle + 1
+            else:
+                r = middle - 1
         else:
-            return('Такого числа нет в массиве')
+            print('Такого числа нет в массиве')
 
-list_ = MiracleList([2, 2, 8])
+list_ = MiracleList([2, 10, 8])
 list_.print()
-print(list_.sort())
-print(list_.bin(2))
+print('Отсортированный массив', list_.sort())
+list_.bin(10)
