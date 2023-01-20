@@ -8,8 +8,8 @@ class MiracleList:
     def __init__(self, mass: int = [0, 1, 0]):
         self.mass = mass
 
-    def print(self):
-        print(self.mass)
+    def get_data(self):
+        return self.mass
 
     def sort(self):
         for i in range(len(self.mass) - 1):
@@ -39,7 +39,18 @@ class MiracleList:
         else:
             print('Такого числа нет в массиве')
 
-list_ = MiracleList([2, 10, 8, 5, 6, 12, 13,3])
-list_.print()
-print('Отсортированный массив', list_.sort())
-list_.bin(12)
+def test_get_data():
+    ml = MiracleList([1, 2, 3])
+    assert ml.get_data() == ml
+
+
+def test_sort():
+    ml = MiracleList([2, 3, 1])
+    ml.sort()
+    assert ml.get_data() == [1, 2, 3]
+
+
+def test_bin():
+    ml = MiracleList([2, 3, 1])
+    ml.sort()
+    assert ml.bin(1) == 1

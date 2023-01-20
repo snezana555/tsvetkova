@@ -1,77 +1,109 @@
-
 class Car:
     """
-    Автомобиль
-    имеет цвет
-    имеет мощность дивгателя
-    имеет максимальный запас бензина в баке
-    имеет расход (например 9.3 литра на 100 км)
-    можно перекрасить
-    можно заправить N литров
-    можно проехать N киллометров
-    можно узнать цвет
-    мощность
-    сколько осталось литров в баке
-    узнать расход
+    класс автомобиль
     """
-    color: str = 'violet'
-    power: int = 106
-    max_petrol: int = 48
-    consumption: int = 10 # на 100 км
-    petrol: int = 0
+    color = 'white'  # цвет
+    engine_power = 90  # мощность двигателя
+    tank_capacity = 50  # объем бака
+    fuel_consumption = 9.3  # расход топлива на 100 км
+    fuel_now = 0  # топлива в баке сейчас
 
-    def __init__(self, color: str = 'violet', power: int = 106, max_petrol: int = 48, consumption: int = 10):
+    def __init__(self, color: str  = 'white', engine_power: int  =  90, tank_capacity: int  =  50, fuel_consumption: int  =  9.3, fuel_now: int = 0):
         self.color = color
-        self.power = power
-        self.max_petrol = max_petrol
-        self.petrol = 0
-        self.consumption = consumption
+        self.engine_power = engine_power
+        self.tank_capacity = tank_capacity
+        self.fuel_consumption = fuel_consumption
+        if fuel_now <= tank_capacity:
+            self.fuel_now = fuel_now
+        else:
+            raise BaseException
 
-    def change_color(self, color):
+    def set_color(self, color):
+        """
+        перекрасить автомобиль
+        """
         self.color = color
-        print('Машина покрашена')
 
-    def add_petrol(self, petrol):
-        if petrol <= 0:
-            print('Вы точно хотите заправить машину?')
-        elif (self.petrol + petrol) >= self.max_petrol:
-            print('Этого слишком много')
-            print('Вы можете добавить не больше ', self.petrol - self.max_petrol)
-        else:
-            self.petrol += petrol
-            print('Машина заправлена')
-
-    def drive(self, count_km):
-        max_km = (self.consumption / 100) * self.petrol
-        print(max_km)
-        if count_km <= 0:
-            print('Вы классный ездок, но величина неправильная')
-        elif max_km > count_km:
-            self.petrol -= (self.consumption / 100 * count_km)
-            print('Отлично, вы проехали ', count_km, ' и потратили ', self.consumption / 100 * count_km , ' литров бензина')
-        else:
-            print('Вы можете проехать не больше ', max_km, ' км')
-
-    def what_color(self):
+    def get_color(self):
+        """
+        узнать цвет
+        """
         return self.color
 
-    def what_power(self):
-        return self.power
+    def get_fuel_now(self):
+        """
+        :return: топлива есть сейчас
+        """
+        return self.fuel_now
 
-    def what_petrol(self):
-        return self.petrol
+    def refuel(self, liters_of_fuel):
+        """
+        заправить liters_of_fuel топлива
+        :param liters_of_fuel:
+        :return:
+        """
+        if liters_of_fuel + self.fuel_now <= self.tank_capacity:
+            self.fuel_now += liters_of_fuel
+            return self.fuel_now
+        else:
+            raise BaseException
 
-    def what_consumption(self):
-        return self.consumption
 
-car_2 = Car(color = 'lightblue', power = 100, max_petrol = 45, consumption = 10)
-car_2.change_color('yellow')
-car_2.add_petrol(20)
-car_2.drive(1)
+    def get_engine_power(self):
+        """
+        узнать мощность двигателя
+        :return:
+        """
+        return self.engine_power
 
-print('Цвет машины ', car_2.what_color())
-print('Мощность',car_2.what_power())
-print('Осталось литров',car_2.what_petrol())
-print('Расход',car_2.what_consumption())
+    def get_fuel_consumption(self):
+        """
+        узнать расход топлива
+        :return:
+        """
+        return self.fuel_consumption
+
+
+def test_init_1():
+    Car(color='white',
+        engine_power=90,
+        tank_capacity=50,
+        fuel_consumption=9.3,
+        fuel_now=0)
+
+
+def test_init_2():
+    Car(color='white')
+
+
+def test_color_1():
+    c = Car(color='white',
+            engine_power=90,
+            tank_capacity=50,
+            fuel_consumption=9.3,
+            fuel_now=0)
+    assert c.get_color() == 'white'
+
+
+def test_color_2():
+    c = Car(color='white',
+            engine_power=90,
+            tank_capacity=50,
+            fuel_consumption=9.3,
+            fuel_now=0)
+    assert c.get_color() == 'white'
+    c.set_color('red')
+
+
+def test_color_3():
+    c = Car(color='white',
+            engine_power=90,
+            tank_capacity=50,
+            fuel_consumption=9.3,
+            fuel_now=0)
+    assert c.get_color() == 'white'
+    c.set_color('red')
+
+    assert c.get_color() == 'red'
 
 
