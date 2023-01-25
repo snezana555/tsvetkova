@@ -1,25 +1,34 @@
+
 class my_queue:
     """
     Необходимо написать реализацию очереди на 2х стеках
     """
+    def __init__(self):
+        self.stack_1 = []
+        self.stack_2 = []
 
     def push(self, el):
         """
         добавляет el в стек
         """
-        pass
+        self.stack_1 += [el]
 
-    def pop(self, el):
+    def pop(self):
         """
         удаляет элемент в стеке и возращает его
         """
-        pass
+        if self.stack_2:
+            return self.stack_2.pop()
+        else:
+            while self.stack_1:
+                self.stack_2 += [self.stack_1.pop()]
+            return self.stack_2.pop()
 
     def size(self):
         """
         возращает размер стека
         """
-        pass
+        return len(self.stack_2 + self.stack_1)
 
 
 def test_1():
@@ -53,3 +62,8 @@ def test_3():
 
 
 test_3()
+
+s = my_queue()
+s.push(4)
+s.push(2)
+print(s.pop())

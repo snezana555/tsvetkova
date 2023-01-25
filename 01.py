@@ -107,3 +107,4 @@ def test_color_3():
     assert c.get_color() == 'red'
 
 
+test_init_2()

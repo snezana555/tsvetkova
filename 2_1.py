@@ -6,7 +6,7 @@ class my_stack:
  При эмуляции будем создавать пустой массив следующим образом: [None] * max_size
     """
     def __init__(self):
-        self.stack = [] * LifoQueue(maxsize)
+        self.stack = []
     def push(self, el):
         """
  добавляет el в стек

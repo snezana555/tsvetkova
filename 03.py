@@ -41,7 +41,7 @@ class MiracleList:
 
 def test_get_data():
     ml = MiracleList([1, 2, 3])
-    assert ml.get_data() == ml
+    assert ml.get_data() == [1,2,3]
 
 
 def test_sort():
@@ -54,3 +54,5 @@ def test_bin():
     ml = MiracleList([2, 3, 1])
     ml.sort()
     assert ml.bin(1) == 1
+
+test_get_data()

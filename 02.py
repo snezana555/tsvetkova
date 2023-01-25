@@ -68,3 +68,5 @@ def test_1():
     game = TikTacToe()
     assert game.place_crosses(1, 3) == 1
     assert game.place_crosses(1, 3) == 0
+
+test_1()
